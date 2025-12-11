@@ -1,0 +1,8 @@
+scrap1 -> impostor, pyramid, top10
+scrap2 -> connections
+scrap3 -> grids
+scrap4 -> formaciones
+scrapClubs1 -> facil
+scrapClubs2 -> dificil
+scrapCountries1 -> facil
+scrapCountries2 -> dificil
