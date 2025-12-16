@@ -20,10 +20,10 @@ def guardar_en_csv(nombre_archivo, encabezados, fila_datos):
                 escritor.writerow(encabezados)
             
             escritor.writerow(fila_datos)
-            print(f"   ✅ Guardado en {nombre_archivo}")
+            print(f" Guardado en {nombre_archivo}")
             
     except PermissionError:
-        print(f"   ❌ ERROR: No se pudo escribir en '{nombre_archivo}'. ¡Ciérralo si lo tienes abierto!")
+        print(f" ERROR: No se pudo escribir en '{nombre_archivo}'. ¡Ciérralo si lo tienes abierto!")
 
 def ejecutar_guardado_diario():
     fecha_hoy = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
@@ -35,7 +35,7 @@ def ejecutar_guardado_diario():
     print("\n--- Procesando Formaciones ---")
     archivo_form = "historial_formaciones.csv"
     # Aquí ya lo teníamos separado, lo mantenemos igual
-    headers_form = ["FECHA", "TIPO", "DIFICULTAD", "FORMACION", "POSICIONES", "PORTEROS", "DEF", "MED", "DEL"]
+    headers_form = ["FECHA", "TIPO", "FORMACION", "POSICIONES"]
     
     for juego in ["Clubes", "Paises"]:
         try:
@@ -44,17 +44,12 @@ def ejecutar_guardado_diario():
                 fila = [
                     fecha_hoy,
                     juego,
-                    "Normal",
                     res['formacion'],
                     ", ".join(res['posiciones']), # Las posiciones individuales las dejamos en una celda para no ocupar 11 columnas extra
-                    res['porteros'],
-                    res['conteo']['DEFENSAS'],
-                    res['conteo']['CENTROCAMPISTAS'],
-                    res['conteo']['DELANTEROS']
                 ]
                 guardar_en_csv(archivo_form, headers_form, fila)
         except Exception as e:
-            print(f"   ⚠️ Error en Formación {juego}: {e}")
+            print(f" Error en Formación {juego}: {e}")
 
     # =========================================================================
     # 2. GRID (9 Columnas) -> Archivo: historial_grid.csv
@@ -87,7 +82,7 @@ def ejecutar_guardado_diario():
     archivo_conn = "historial_connections.csv"
     
     # CAMBIO: Creamos 4 encabezados para las categorías
-    headers_conn = ["FECHA", "DIFICULTAD", "GRUPO_1", "GRUPO_2", "GRUPO_3", "GRUPO_4"]
+    headers_conn = ["FECHA", "DIFICULTAD", "CATEGORIA_1", "CATEGORIA_2", "CATEGORIA_3", "CATEGORIA_4"]
     
     dificultades_conn = ["easy", "normal"]
     
@@ -108,7 +103,7 @@ def ejecutar_guardado_diario():
     # =========================================================================
     print("\n--- Procesando Otros Minijuegos ---")
     archivo_mini = "historial_minijuegos.csv"
-    headers_mini = ["FECHA", "JUEGO", "DIFICULTAD", "DATO EXTRAIDO"]
+    headers_mini = ["FECHA", "JUEGO", "CATEGORIA JUEGO"]
     
     lista_minijuegos = [
         { "nombre": "Pyramid",  "url": "https://futbol-11.com/futbol11-pyramid", "dif": "easy",   "clase": "gameCategory" },
@@ -120,7 +115,7 @@ def ejecutar_guardado_diario():
         try:
             res = s_minijuegos.extraer_minijuego(juego["url"], juego["dif"], juego["clase"])
             if res:
-                fila = [fecha_hoy, juego["nombre"], juego["dif"], res]
+                fila = [fecha_hoy, juego["nombre"], res]
                 guardar_en_csv(archivo_mini, headers_mini, fila)
         except Exception as e:
             print(f"   ⚠️ Error en {juego['nombre']}: {e}")
