@@ -9,7 +9,7 @@ import time
 # --- CONFIGURACIÓN DE SELECTORES ---
 ID_BOTON_COOKIES = "accept-choices"
 CLASE_BOTON_START = "startGame" 
-CLASE_DATO_GRID = "groupTitle" # Clase que contiene los 9 títulos
+CLASE_DATO_GRID = "groupTitle" # Clase que contiene los 6 títulos
 
 def extraer_grid(dificultad_valor):
     """
@@ -59,7 +59,7 @@ def extraer_grid(dificultad_valor):
         html_cargado = driver.page_source
         sopa = BeautifulSoup(html_cargado, 'html.parser')
         
-        # Búsqueda de TODOS los 9 elementos con la clase
+        # Búsqueda de TODOS los 6 elementos con la clase
         elementos_encontrados = sopa.find_all(attrs={'class': CLASE_DATO_GRID})
 
         if elementos_encontrados:

@@ -1,0 +1,5 @@
+FECHA;DIFICULTAD;T1;T2;T3;T4;T5;T6;T1_T4;T2_T4;T3_T4;T1_T5;T2_T5;T3_T5;T1_T6;T2_T6;T3_T6
+2025-12-22 01:06;Easy;Arsenal;Liverpool;Atl Madrid;Man City;Chelsea;Inter;Arsenal_Man City;Liverpool_Man City;Atl Madrid_Man City;Arsenal_Chelsea;Liverpool_Chelsea;Atl Madrid_Chelsea;Arsenal_Inter;Liverpool_Inter;Atl Madrid_Inter
+2025-12-22 01:06;Normal;Arsenal;Inter;France;Man City;Chelsea;Atl Madrid;Arsenal_Man City;Inter_Man City;France_Man City;Arsenal_Chelsea;Inter_Chelsea;France_Chelsea;Arsenal_Atl Madrid;Inter_Atl Madrid;France_Atl Madrid
+2025-12-22 01:06;Hard;Man City;Brazil;Denmark;Arsenal;Chelsea;Atl Madrid;Man City_Arsenal;Brazil_Arsenal;Denmark_Arsenal;Man City_Chelsea;Brazil_Chelsea;Denmark_Chelsea;Man City_Atl Madrid;Brazil_Atl Madrid;Denmark_Atl Madrid
+2025-12-22 01:06;Legend;Man Utd;Portugal;Ukraine;Arsenal;PSG;Marseille;Man Utd_Arsenal;Portugal_Arsenal;Ukraine_Arsenal;Man Utd_PSG;Portugal_PSG;Ukraine_PSG;Man Utd_Marseille;Portugal_Marseille;Ukraine_Marseille

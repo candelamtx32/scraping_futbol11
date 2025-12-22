@@ -4,7 +4,6 @@ import os
 
 # --- IMPORTACIÓN DE TUS SCRIPTS ---
 import scrap4 as s_formaciones      # Formaciones
-import scrap3 as s_grid             # Grid
 import scrap2 as s_connections      # Connections
 import scrap1 as s_minijuegos       # Minijuegos
 
@@ -34,7 +33,6 @@ def ejecutar_guardado_diario():
     # =========================================================================
     print("\n--- Procesando Formaciones ---")
     archivo_form = "historial_formaciones.csv"
-    # Aquí ya lo teníamos separado, lo mantenemos igual
     headers_form = ["FECHA", "TIPO", "FORMACION", "POSICIONES"]
     
     for juego in ["Clubes", "Paises"]:
@@ -45,52 +43,25 @@ def ejecutar_guardado_diario():
                     fecha_hoy,
                     juego,
                     res['formacion'],
-                    ", ".join(res['posiciones']), # Las posiciones individuales las dejamos en una celda para no ocupar 11 columnas extra
+                    ", ".join(res['posiciones']),
                 ]
                 guardar_en_csv(archivo_form, headers_form, fila)
         except Exception as e:
             print(f" Error en Formación {juego}: {e}")
 
     # =========================================================================
-    # 2. GRID (9 Columnas) -> Archivo: historial_grid.csv
-    # =========================================================================
-    print("\n--- Procesando Grid ---")
-    archivo_grid = "historial_grid.csv"
-    
-    # CAMBIO: Creamos 9 encabezados para los 9 títulos
-    headers_grid = ["FECHA", "DIFICULTAD", "C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9"]
-    
-    dificultades_grid = ["easy", "normal", "hard", "legend"]
-    
-    for dif in dificultades_grid:
-        try:
-            res = s_grid.extraer_grid(dif) # Esto devuelve una lista de 9 elementos
-            if res and len(res) == 9:
-                # CAMBIO: Sumamos la lista de datos a la lista de información inicial
-                # [Fecha, Dif] + [Titulo1, Titulo2, ..., Titulo9]
-                fila = [fecha_hoy, dif.capitalize()] + res
-                guardar_en_csv(archivo_grid, headers_grid, fila)
-            else:
-                print(f"   ⚠️ Grid {dif}: Se esperaban 9 elementos, se encontraron {len(res) if res else 0}")
-        except Exception as e:
-            print(f"   ⚠️ Error en Grid {dif}: {e}")
-
-    # =========================================================================
-    # 3. CONNECTIONS (4 Columnas) -> Archivo: historial_connections.csv
+    # 2. CONNECTIONS (4 Columnas) -> Archivo: historial_connections.csv
     # =========================================================================
     print("\n--- Procesando Connections ---")
     archivo_conn = "historial_connections.csv"
-    
-    # CAMBIO: Creamos 4 encabezados para las categorías
     headers_conn = ["FECHA", "DIFICULTAD", "CATEGORIA_1", "CATEGORIA_2", "CATEGORIA_3", "CATEGORIA_4"]
     
     dificultades_conn = ["easy", "normal"]
     
     for dif in dificultades_conn:
         try:
-            res = s_connections.extraer_connections(dif) # Esto devuelve una lista de 4 elementos
+            res = s_connections.extraer_connections(dif)
             if res and len(res) == 4:
-                # CAMBIO: Desglosamos la lista en columnas
                 fila = [fecha_hoy, dif.capitalize()] + res
                 guardar_en_csv(archivo_conn, headers_conn, fila)
             else:
@@ -99,7 +70,7 @@ def ejecutar_guardado_diario():
             print(f"   ⚠️ Error en Connections {dif}: {e}")
 
     # =========================================================================
-    # 4. MINIJUEGOS -> Archivo: historial_minijuegos.csv
+    # 3. MINIJUEGOS -> Archivo: historial_minijuegos.csv
     # =========================================================================
     print("\n--- Procesando Otros Minijuegos ---")
     archivo_mini = "historial_minijuegos.csv"
